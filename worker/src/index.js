@@ -2,17 +2,23 @@ const ALLOWED_ORIGINS = new Set([
   'https://alaning.me',
   'https://www.alaning.me',
   'https://alaning0.github.io',
-  'http://localhost:8787',
-  'http://127.0.0.1:8787',
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
   'http://localhost:5500',
   'http://127.0.0.1:5500',
+  'http://localhost:8080',
+  'http://127.0.0.1:8080',
+  'http://localhost:8787',
+  'http://127.0.0.1:8787',
 ]);
 
 function corsHeaders(origin) {
   const allow = origin && ALLOWED_ORIGINS.has(origin) ? origin : 'https://alaning.me';
   return {
     'Access-Control-Allow-Origin': allow,
-    'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
+    'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Access-Control-Max-Age': '86400',
     Vary: 'Origin',
@@ -40,6 +46,17 @@ function mapIdea(row) {
   };
 }
 
+function parseIdeaFields(body) {
+  const title = typeof body?.title === 'string' ? body.title.trim() : '';
+  const description =
+    typeof body?.description === 'string'
+      ? body.description.trim()
+      : typeof body?.notes === 'string'
+        ? body.notes.trim()
+        : '';
+  return { title, description };
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin');
@@ -61,13 +78,7 @@ export default {
 
       if (url.pathname === '/api/ideas' && request.method === 'POST') {
         const body = await request.json().catch(() => null);
-        const title = typeof body?.title === 'string' ? body.title.trim() : '';
-        const description =
-          typeof body?.description === 'string'
-            ? body.description.trim()
-            : typeof body?.notes === 'string'
-              ? body.notes.trim()
-              : '';
+        const { title, description } = parseIdeaFields(body);
 
         if (!title) return json({ error: 'Title is required.' }, 400, origin);
         if (title.length > 200) {
@@ -109,6 +120,47 @@ export default {
           .first();
 
         return json({ idea: mapIdea(row) }, 200, origin);
+      }
+
+      const ideaMatch = url.pathname.match(/^\/api\/ideas\/(\d+)$/);
+      if (ideaMatch && request.method === 'PATCH') {
+        const id = Number(ideaMatch[1]);
+        const body = await request.json().catch(() => null);
+        const { title, description } = parseIdeaFields(body);
+
+        if (!title) return json({ error: 'Title is required.' }, 400, origin);
+        if (title.length > 200) {
+          return json({ error: 'Title must be 200 characters or fewer.' }, 400, origin);
+        }
+        if (description.length > 5000) {
+          return json({ error: 'Description must be 5000 characters or fewer.' }, 400, origin);
+        }
+
+        const row = await env.DB.prepare(
+          `UPDATE ideas
+           SET title = ?, description = ?, updated_at = datetime('now')
+           WHERE id = ?
+           RETURNING id, title, description, starred, created_at, updated_at`
+        )
+          .bind(title, description, id)
+          .first();
+
+        if (!row) return json({ error: 'Idea not found.' }, 404, origin);
+        return json({ idea: mapIdea(row) }, 200, origin);
+      }
+
+      if (ideaMatch && request.method === 'DELETE') {
+        const id = Number(ideaMatch[1]);
+        const existing = await env.DB.prepare(
+          `SELECT id FROM ideas WHERE id = ?`
+        )
+          .bind(id)
+          .first();
+
+        if (!existing) return json({ error: 'Idea not found.' }, 404, origin);
+
+        await env.DB.prepare(`DELETE FROM ideas WHERE id = ?`).bind(id).run();
+        return json({ ok: true, id }, 200, origin);
       }
 
       if (url.pathname === '/api/health' && request.method === 'GET') {
