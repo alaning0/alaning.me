@@ -1,0 +1,63 @@
+/* alaning.me — quiet personal presence */
+:root {
+  --brand: #0f766e;
+  --brand-ink: #0d5c56;
+  --brand-soft: #d8f3ef;
+
+  --bg: #eef2f4;
+  --bg-deep: #dbe4ea;
+  --ink: #12161c;
+  --text: #1a222c;
+  --text-dim: #5a6674;
+  --text-faint: #8490a0;
+
+  --surface: rgba(255, 255, 255, 0.55);
+  --surface-solid: #f7fafb;
+  --line: rgba(18, 22, 28, 0.1);
+  --line-soft: rgba(18, 22, 28, 0.07);
+
+  --star: #c9a227;
+  --star-soft: #f6efd4;
+  --danger: #b42318;
+
+  --sans: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+
+  --radius: 10px;
+  --radius-sm: 8px;
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --shadow: 0 1px 0 rgba(18, 22, 28, 0.04), 0 10px 28px rgba(18, 22, 28, 0.06);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+a {
+  color: inherit;
+}
+
+::selection {
+  background: var(--brand-soft);
+  color: var(--ink);
+}
+
+[x-cloak] {
+  display: none !important;
+}

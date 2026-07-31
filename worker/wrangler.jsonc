@@ -1,0 +1,17 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "alaning-me-api",
+  "main": "src/index.js",
+  "compatibility_date": "2026-07-31",
+  "observability": {
+    "enabled": true
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "alaning-ideas",
+      "database_id": "ba8e3aaa-ca3e-4003-8e29-2acd7c275c12",
+      "migrations_dir": "migrations"
+    }
+  ]
+}
