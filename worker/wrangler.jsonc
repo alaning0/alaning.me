@@ -3,9 +3,14 @@
   "name": "alaning-me-api",
   "main": "src/index.js",
   "compatibility_date": "2026-07-31",
+  "workers_dev": true,
   "observability": {
     "enabled": true
   },
+  "routes": [
+    { "pattern": "alaning.me/api*", "zone_name": "alaning.me" },
+    { "pattern": "www.alaning.me/api*", "zone_name": "alaning.me" }
+  ],
   "d1_databases": [
     {
       "binding": "DB",

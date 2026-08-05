@@ -14,12 +14,16 @@ const ALLOWED_ORIGINS = new Set([
   'http://127.0.0.1:8787',
 ]);
 
+const TITLE_MAX = 200;
+const SHORTCUT_TITLE_MAX = 500;
+const DESCRIPTION_MAX = 5000;
+
 function corsHeaders(origin) {
   const allow = origin && ALLOWED_ORIGINS.has(origin) ? origin : 'https://alaning.me';
   return {
     'Access-Control-Allow-Origin': allow,
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, DELETE, OPTIONS',
-    'Access-Control-Allow-Headers': 'Content-Type',
+    'Access-Control-Allow-Headers': 'Content-Type, Authorization, X-Api-Key',
     'Access-Control-Max-Age': '86400',
     Vary: 'Origin',
   };
@@ -46,8 +50,11 @@ function mapIdea(row) {
   };
 }
 
-function parseIdeaFields(body) {
-  const title = typeof body?.title === 'string' ? body.title.trim() : '';
+function parseIdeaFields(body, { allowUrl = false } = {}) {
+  let title = typeof body?.title === 'string' ? body.title.trim() : '';
+  if (!title && allowUrl && typeof body?.url === 'string') {
+    title = body.url.trim();
+  }
   const description =
     typeof body?.description === 'string'
       ? body.description.trim()
@@ -55,6 +62,56 @@ function parseIdeaFields(body) {
         ? body.notes.trim()
         : '';
   return { title, description };
+}
+
+function requestApiKey(request) {
+  const auth = request.headers.get('Authorization');
+  if (auth) {
+    const match = auth.match(/^Bearer\s+(.+)$/i);
+    if (match) return match[1].trim();
+  }
+  const headerKey = request.headers.get('X-Api-Key');
+  return headerKey ? headerKey.trim() : '';
+}
+
+function requireApiKey(request, env, origin) {
+  if (!env.API_KEY) {
+    return json({ error: 'API key not configured.' }, 503, origin);
+  }
+  const key = requestApiKey(request);
+  if (!key || key !== env.API_KEY) {
+    return json({ error: 'Unauthorized' }, 401, origin);
+  }
+  return null;
+}
+
+async function insertIdea(env, title, description) {
+  return env.DB.prepare(
+    `INSERT INTO ideas (title, description)
+     VALUES (?, ?)
+     RETURNING id, title, description, starred, created_at, updated_at`
+  )
+    .bind(title, description)
+    .first();
+}
+
+function validateIdeaFields(title, description, origin, titleMax = TITLE_MAX) {
+  if (!title) return json({ error: 'Title is required.' }, 400, origin);
+  if (title.length > titleMax) {
+    return json(
+      { error: `Title must be ${titleMax} characters or fewer.` },
+      400,
+      origin
+    );
+  }
+  if (description.length > DESCRIPTION_MAX) {
+    return json(
+      { error: 'Description must be 5000 characters or fewer.' },
+      400,
+      origin
+    );
+  }
+  return null;
 }
 
 export default {
@@ -67,6 +124,24 @@ export default {
     }
 
     try {
+      if (url.pathname === '/api' && request.method === 'POST') {
+        const authError = requireApiKey(request, env, origin);
+        if (authError) return authError;
+
+        const body = await request.json().catch(() => null);
+        const { title, description } = parseIdeaFields(body, { allowUrl: true });
+        const validationError = validateIdeaFields(
+          title,
+          description,
+          origin,
+          SHORTCUT_TITLE_MAX
+        );
+        if (validationError) return validationError;
+
+        const row = await insertIdea(env, title, description);
+        return json({ idea: mapIdea(row) }, 201, origin);
+      }
+
       if (url.pathname === '/api/ideas' && request.method === 'GET') {
         const { results } = await env.DB.prepare(
           `SELECT id, title, description, starred, created_at, updated_at
@@ -79,23 +154,10 @@ export default {
       if (url.pathname === '/api/ideas' && request.method === 'POST') {
         const body = await request.json().catch(() => null);
         const { title, description } = parseIdeaFields(body);
+        const validationError = validateIdeaFields(title, description, origin);
+        if (validationError) return validationError;
 
-        if (!title) return json({ error: 'Title is required.' }, 400, origin);
-        if (title.length > 200) {
-          return json({ error: 'Title must be 200 characters or fewer.' }, 400, origin);
-        }
-        if (description.length > 5000) {
-          return json({ error: 'Description must be 5000 characters or fewer.' }, 400, origin);
-        }
-
-        const row = await env.DB.prepare(
-          `INSERT INTO ideas (title, description)
-           VALUES (?, ?)
-           RETURNING id, title, description, starred, created_at, updated_at`
-        )
-          .bind(title, description)
-          .first();
-
+        const row = await insertIdea(env, title, description);
         return json({ idea: mapIdea(row) }, 201, origin);
       }
 
@@ -127,14 +189,8 @@ export default {
         const id = Number(ideaMatch[1]);
         const body = await request.json().catch(() => null);
         const { title, description } = parseIdeaFields(body);
-
-        if (!title) return json({ error: 'Title is required.' }, 400, origin);
-        if (title.length > 200) {
-          return json({ error: 'Title must be 200 characters or fewer.' }, 400, origin);
-        }
-        if (description.length > 5000) {
-          return json({ error: 'Description must be 5000 characters or fewer.' }, 400, origin);
-        }
+        const validationError = validateIdeaFields(title, description, origin);
+        if (validationError) return validationError;
 
         const row = await env.DB.prepare(
           `UPDATE ideas

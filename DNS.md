@@ -1,15 +1,28 @@
-# DNS — Namecheap → GitHub Pages
+# DNS — Cloudflare → GitHub Pages + Workers
 
-`alaning.me` is served by GitHub Pages. The ideas API lives on Cloudflare Workers (`alaning-me-api.alaning0.workers.dev`).
+Registrar: Namecheap. Authoritative DNS: Cloudflare zone `alaning.me`
+(nameservers `ligia.ns.cloudflare.com`, `margo.ns.cloudflare.com`).
 
-## Apex + www
+Traffic is orange-cloud proxied. Public A/AAAA answers are Cloudflare anycast,
+not the origin IPs.
 
-| Type  | Host | Value            |
-|-------|------|------------------|
-| A     | `@`  | `185.199.108.153` |
-| A     | `@`  | `185.199.109.153` |
-| A     | `@`  | `185.199.110.153` |
-| A     | `@`  | `185.199.111.153` |
-| CNAME | `www`| `alaning0.github.io` |
+| Layer | Host | Role |
+|-------|------|------|
+| Static site | `alaning.me` / `www` | Origin: GitHub Pages (`alaning0.github.io`); repo `CNAME` = `alaning.me` |
+| API | `alaning.me/api*` (and `www`) | Workers route → `alaning-me-api` (also on `*.workers.dev`) |
 
-Repo `CNAME` file contains `alaning.me`.
+## Origin records (Cloudflare dashboard)
+
+Keep apex + www pointing at GitHub Pages behind the proxy (exact record
+shapes as configured in the zone — typically GitHub Pages A records and/or
+`www` → `alaning0.github.io`). Do not point public DNS at the old unproxied
+GitHub A list as if Cloudflare were not in the path.
+
+## Workers routes
+
+Configured in `worker/wrangler.jsonc`:
+
+- `alaning.me/api*`
+- `www.alaning.me/api*`
+
+Non-`/api*` paths fall through to the GitHub Pages origin.
