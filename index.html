@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>alaning.me</title>
-  <meta name="description" content="Alan Ing — personal site. Projects, notes, and experiments.">
+  <meta name="description" content="Alan Ing — software engineer in Auckland. Notes about software, AI, systems, learning, food, and games.">
   <meta name="theme-color" content="#eef2f4">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%230f766e'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' font-weight='600' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -61,43 +61,48 @@
       font-variation-settings: "opsz" 144;
     }
 
-    .headline {
-      margin: 0 0 0.75rem;
-      max-width: 20ch;
+    .bio {
+      margin-bottom: 3rem;
+    }
+
+    .bio-section {
+      margin-bottom: 2.25rem;
+    }
+
+    .bio-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .bio-section h2 {
+      margin: 0 0 1rem;
       font-family: var(--display);
       font-weight: 500;
-      font-size: clamp(1.3rem, 3vw, 1.75rem);
-      line-height: 1.25;
-      letter-spacing: -0.02em;
+      font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+      line-height: 1.3;
+      letter-spacing: -0.015em;
+      color: var(--ink);
+    }
+
+    .bio-intro {
+      font-size: clamp(1.3rem, 3vw, 1.6rem) !important;
+      margin-bottom: 1.25rem !important;
+    }
+
+    .bio-section p {
+      margin: 0 0 1rem;
+      font-size: 1rem;
+      line-height: 1.7;
       color: var(--text);
+      max-width: 65ch;
     }
 
-    .lede {
-      margin: 0 0 0.75rem;
-      max-width: 34ch;
-      font-size: 1.05rem;
-      line-height: 1.55;
-      color: var(--text);
+    .bio-section p:last-child {
+      margin-bottom: 0;
     }
 
-    .links {
-      margin: 0 0 2.5rem;
-      display: flex;
-      gap: 1rem;
-      flex-wrap: wrap;
-    }
-
-    .link-item {
-      font-size: 0.9rem;
-      font-weight: 500;
-      color: var(--brand-ink);
-      text-decoration: none;
-      transition: color 0.15s ease;
-    }
-
-    .link-item:hover {
-      color: var(--brand);
-      text-decoration: underline;
+    .bio-outro {
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
     }
 
     .btn {
@@ -339,14 +344,67 @@
     >
       <header>
         <h1 class="brand reveal d1">alaning.me</h1>
-        <p class="headline reveal d2">A quiet place on the internet for Alan Ing.</p>
-        <p class="lede reveal d3">Engineer and maker. Notes and experiments below.</p>
-        <p class="links reveal d3">
-          <a href="https://github.com/alaning0" target="_blank" rel="noopener" class="link-item">GitHub</a>
-        </p>
       </header>
 
-      <section class="reveal d4" aria-labelledby="ideas-heading">
+      <article class="bio reveal d2">
+        <section class="bio-section">
+          <h2 class="bio-intro">Hi, I'm Alan.</h2>
+          <p>I'm a software engineer based in Auckland, New Zealand, with a habit of getting curious about how things work — software systems, businesses, games, people, and occasionally myself.</p>
+          <p>Professionally, I work with technologies such as C#, .NET, React, TypeScript, SQL Server, Azure, distributed systems, APIs, cloud infrastructure, and automation. I enjoy the engineering side of the job, but I'm particularly interested in the point where technology meets real problems: understanding a system, finding where it breaks down, and figuring out how to make it simpler, more reliable, or more useful.</p>
+          <p>More recently, AI has become a big part of that curiosity. I'm interested in experimenting with AI tools and finding practical ways to use them in everyday workflows: coding, research, automation, learning, note-taking, and thinking through difficult problems.</p>
+        </section>
+
+        <section class="bio-section">
+          <h2>I like understanding systems</h2>
+          <p>A recurring theme in the things I enjoy is systems.</p>
+          <p>Give me a board game like Wingspan and I'll eventually start thinking about engines, resource flows, opportunity costs, and why one seemingly small decision compounds over several turns. Teach me accounting and I want to understand the underlying model: where value resides, how it moves, and why a single transaction can affect several different accounts.</p>
+          <p>The same instinct appears in software architecture, cooking, running, communication, and even storytelling.</p>
+          <p>I like getting past "what should I do?" and reaching "what is actually happening here?"</p>
+          <p>Once I have a mental model, experimentation becomes much more interesting.</p>
+        </section>
+
+        <section class="bio-section">
+          <h2>Learning is one of my hobbies</h2>
+          <p>I tend to wander between subjects.</p>
+          <p>At various times that has meant learning more about accounting, psychology, communication, logical fallacies, storytelling, history, economics, AI, computer infrastructure, food, and game strategy.</p>
+          <p>I particularly enjoy ideas that suddenly make a collection of unrelated experiences fit together. Sometimes a concept from a board game turns out to be useful for thinking about software. A communication framework explains something I've noticed in conversations. A principle from endurance running turns out to be surprisingly similar to the way you build competence elsewhere: pace yourself, repeat the fundamentals, and improve gradually.</p>
+          <p>My notes tend to grow out of these connections.</p>
+          <p>I use tools like Obsidian to capture things I encounter, but I'm increasingly interested in using a personal knowledge base for more than storing information. I want it to be somewhere I can return to ideas, connect them, challenge them, and notice how my thinking changes over time.</p>
+        </section>
+
+        <section class="bio-section">
+          <h2>Away from the computer</h2>
+          <p>I enjoy running, skiing, cooking, board games, video games, and finding good food.</p>
+          <p>With running, I've become interested in endurance and pacing rather than simply trying to go as fast as possible. With skiing, I'm fascinated by the same progression from brute effort toward technique and efficiency.</p>
+          <p>Cooking scratches another kind of itch. I like understanding the components of a dish well enough that a recipe becomes less of a rigid set of instructions and more of a system I can play with. Chinese takeaway favourites, Filipino food, pasta, roast chicken, sauces, and whatever happens to look interesting at a night market have all provided useful experiments.</p>
+          <p>Games occupy a similar place for me. I enjoy the worlds and stories of games like Red Dead Redemption 2 and Cyberpunk 2077, but I'm equally capable of turning a board game into a small research project because I want to understand why good players make the decisions they do.</p>
+        </section>
+
+        <section class="bio-section">
+          <h2>I'm interested in people, too</h2>
+          <p>For someone who spends a lot of time thinking about technical systems, I've become increasingly interested in the much messier systems created by humans.</p>
+          <p>Why do people tell stories?</p>
+          <p>Why does complaining sometimes bring people closer together?</p>
+          <p>Why is gossip so tempting even when we know it can be risky?</p>
+          <p>Why can asking someone a direct question produce a one-word answer, while telling them a related story suddenly produces a ten-minute conversation?</p>
+          <p>I like frameworks, but I'm also learning that people cannot be reduced entirely to frameworks. Contradictions, uncertainty, humour, mistakes, changing your mind, and occasionally not having a neat explanation for something are part of being human.</p>
+          <p>That tension — between wanting to understand things systematically and recognising that not everything should be systematised — is probably one of the ideas I keep returning to.</p>
+        </section>
+
+        <section class="bio-section">
+          <h2>What I value</h2>
+          <p>Curiosity is probably the simplest description.</p>
+          <p>I like people who are willing to ask questions, try things, share what they discover, and admit when their model of the world needs updating.</p>
+          <p>I value competence, but also playfulness. Technology that solves a real problem. Conversations where people can actually be themselves. Learning something because it is useful, and occasionally learning something simply because it is interesting.</p>
+        </section>
+
+        <section class="bio-section bio-outro">
+          <p>This website is a place for some of that.</p>
+          <p>Expect notes about software, AI, things I'm learning, systems I'm trying to understand, food I'm experimenting with, games I'm overthinking, and ideas that I want to keep around long enough to think about properly.</p>
+        </section>
+      </article>
+
+      <section class="reveal d3" aria-labelledby="ideas-heading">
         <div class="ideas-head">
           <h2 id="ideas-heading">Ideas</h2>
           <button
