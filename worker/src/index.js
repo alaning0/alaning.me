@@ -152,6 +152,9 @@ export default {
       }
 
       if (url.pathname === '/api/ideas' && request.method === 'POST') {
+        const authError = requireApiKey(request, env, origin);
+        if (authError) return authError;
+
         const body = await request.json().catch(() => null);
         const { title, description } = parseIdeaFields(body);
         const validationError = validateIdeaFields(title, description, origin);
@@ -163,6 +166,9 @@ export default {
 
       const starMatch = url.pathname.match(/^\/api\/ideas\/(\d+)\/star$/);
       if (starMatch && request.method === 'POST') {
+        const authError = requireApiKey(request, env, origin);
+        if (authError) return authError;
+
         const id = Number(starMatch[1]);
         const existing = await env.DB.prepare(
           `SELECT id, starred FROM ideas WHERE id = ?`
@@ -186,6 +192,9 @@ export default {
 
       const ideaMatch = url.pathname.match(/^\/api\/ideas\/(\d+)$/);
       if (ideaMatch && request.method === 'PATCH') {
+        const authError = requireApiKey(request, env, origin);
+        if (authError) return authError;
+
         const id = Number(ideaMatch[1]);
         const body = await request.json().catch(() => null);
         const { title, description } = parseIdeaFields(body);
@@ -206,6 +215,9 @@ export default {
       }
 
       if (ideaMatch && request.method === 'DELETE') {
+        const authError = requireApiKey(request, env, origin);
+        if (authError) return authError;
+
         const id = Number(ideaMatch[1]);
         const existing = await env.DB.prepare(
           `SELECT id FROM ideas WHERE id = ?`

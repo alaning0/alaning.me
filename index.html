@@ -4,8 +4,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>alaning.me</title>
-  <meta name="description" content="Alan Ing — personal site. Projects, notes, and experiments.">
+  <meta name="description" content="Alan Ing — software engineer in Auckland. Notes about software, AI, systems, learning, food, and games.">
   <meta name="theme-color" content="#eef2f4">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='12' fill='%230f766e'/%3E%3Ctext x='50' y='68' font-family='Georgia,serif' font-size='58' font-weight='600' fill='white' text-anchor='middle'%3EA%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600&display=swap" rel="stylesheet">
@@ -60,88 +61,48 @@
       font-variation-settings: "opsz" 144;
     }
 
-    .headline {
-      margin: 0 0 0.75rem;
-      max-width: 20ch;
+    .bio {
+      margin-bottom: 3rem;
+    }
+
+    .bio-section {
+      margin-bottom: 2.25rem;
+    }
+
+    .bio-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .bio-section h2 {
+      margin: 0 0 1rem;
       font-family: var(--display);
       font-weight: 500;
-      font-size: clamp(1.3rem, 3vw, 1.75rem);
-      line-height: 1.25;
-      letter-spacing: -0.02em;
-      color: var(--text);
-    }
-
-    .lede {
-      margin: 0 0 2.5rem;
-      max-width: 34ch;
-      font-size: 1.05rem;
-      line-height: 1.55;
-      color: var(--text-dim);
-    }
-
-    .panel {
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      background: var(--surface);
-      backdrop-filter: blur(12px);
-      box-shadow: var(--shadow);
-      padding: 1.25rem 1.35rem;
-    }
-
-    .section-label {
-      margin: 0 0 0.85rem;
-      font-size: 0.72rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--text-faint);
-    }
-
-    label {
-      display: block;
-      margin-bottom: 0.4rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-      color: var(--text-dim);
-    }
-
-    .panel input,
-    .panel textarea {
-      width: 100%;
-      margin-bottom: 1rem;
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      background: rgba(255, 255, 255, 0.85);
+      font-size: clamp(1.15rem, 2.5vw, 1.35rem);
+      line-height: 1.3;
+      letter-spacing: -0.015em;
       color: var(--ink);
-      font-family: var(--sans);
-      font-size: 0.95rem;
-      padding: 0.7rem 0.85rem;
-      outline: none;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
-    .panel input:focus,
-    .panel textarea:focus {
-      border-color: var(--brand);
-      box-shadow: 0 0 0 3px var(--brand-soft);
+    .bio-intro {
+      font-size: clamp(1.3rem, 3vw, 1.6rem) !important;
+      margin-bottom: 1.25rem !important;
     }
 
-    .panel textarea {
-      min-height: 6rem;
-      resize: vertical;
+    .bio-section p {
+      margin: 0 0 1rem;
+      font-size: 1rem;
+      line-height: 1.7;
+      color: var(--text);
+      max-width: 65ch;
     }
 
-    .form-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 1rem;
-      margin-top: 0.25rem;
+    .bio-section p:last-child {
+      margin-bottom: 0;
     }
 
-    .hint {
-      font-size: 0.75rem;
-      color: var(--text-faint);
+    .bio-outro {
+      padding-top: 1rem;
+      border-top: 1px solid var(--line);
     }
 
     .btn {
@@ -168,15 +129,6 @@
       cursor: not-allowed;
     }
 
-    .btn-primary {
-      background: var(--ink);
-      color: #f4f7f8;
-    }
-
-    .btn-primary:hover:not(:disabled) {
-      background: #000;
-    }
-
     .btn-ghost {
       background: transparent;
       border: none;
@@ -190,12 +142,6 @@
     .btn-ghost:hover {
       color: var(--brand-ink);
       transform: none;
-    }
-
-    .error {
-      margin: 0 0 0.75rem;
-      font-size: 0.875rem;
-      color: var(--danger);
     }
 
     .ideas-head {
@@ -236,30 +182,17 @@
       animation: pop-in 0.35s var(--ease) both;
     }
 
-    .star-btn {
+    .star-badge {
       flex-shrink: 0;
-      width: 2.25rem;
-      height: 2.25rem;
-      margin-top: 0.1rem;
-      border: none;
+      width: 1.75rem;
+      height: 1.75rem;
+      margin-top: 0.15rem;
       border-radius: 999px;
-      background: transparent;
-      color: var(--text-faint);
-      cursor: pointer;
+      background: var(--star-soft);
+      color: var(--star);
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      transition: transform 0.15s ease, color 0.15s ease, background 0.15s ease;
-    }
-
-    .star-btn:hover {
-      transform: scale(1.08);
-      background: var(--star-soft);
-    }
-
-    .star-btn.is-on {
-      color: var(--star);
-      background: var(--star-soft);
     }
 
     .idea-body {
@@ -280,67 +213,30 @@
       font-weight: 600;
       line-height: 1.35;
       color: var(--ink);
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      hyphens: auto;
     }
 
-    .idea-meta {
-      flex-shrink: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: flex-end;
-      gap: 0.45rem;
+    .idea-link {
+      color: var(--brand-ink);
+      text-decoration: none;
+      word-break: break-all;
+      transition: color 0.15s ease;
+    }
+
+    .idea-link:hover {
+      color: var(--brand);
+      text-decoration: underline;
     }
 
     .idea-date {
+      flex-shrink: 0;
       font-size: 0.75rem;
       color: var(--text-faint);
       line-height: 1;
-    }
-
-    .idea-actions {
-      display: flex;
-      align-items: center;
-      gap: 0.15rem;
-    }
-
-    .icon-btn {
-      width: 2rem;
-      height: 2rem;
-      border: none;
-      border-radius: 999px;
-      background: transparent;
-      color: var(--text-faint);
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      transition: color 0.15s ease, background 0.15s ease, transform 0.15s ease;
-    }
-
-    .icon-btn:hover:not(:disabled) {
-      color: var(--ink);
-      background: rgba(18, 22, 28, 0.06);
-      transform: scale(1.06);
-    }
-
-    .icon-btn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .icon-btn.danger:hover:not(:disabled),
-    .icon-btn.armed {
-      color: var(--danger);
-      background: rgba(180, 35, 24, 0.08);
-    }
-
-    .icon-btn.armed:hover:not(:disabled) {
-      color: #911c14;
-      background: rgba(180, 35, 24, 0.14);
-    }
-
-    .icon-btn.is-editing {
-      color: var(--brand-ink);
-      background: var(--brand-soft);
+      margin-left: auto;
+      padding-left: 0.75rem;
     }
 
     .idea-copy {
@@ -352,48 +248,24 @@
       margin: 0.45rem 0 0;
       font-size: 0.9rem;
       line-height: 1.55;
-      color: var(--text-dim);
+      color: var(--text);
       white-space: pre-wrap;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
     }
 
-    .inline-edit {
-      display: block;
-      width: 100%;
-      margin: 0;
-      padding: 0 0 0.15rem;
-      border: none;
-      border-bottom: 1px solid rgba(18, 22, 28, 0.35);
-      border-radius: 0;
-      background: transparent;
-      box-shadow: none;
-      outline: none;
-      color: inherit;
-      font-family: inherit;
-      line-height: inherit;
-      resize: none;
-      overflow: hidden;
-      caret-color: var(--ink);
-      transition: border-color 0.15s ease;
+    .error-box {
+      border: 1px solid rgba(180, 35, 24, 0.2);
+      border-radius: var(--radius);
+      background: rgba(180, 35, 24, 0.06);
+      padding: 1.25rem 1.35rem;
+      text-align: center;
     }
 
-    .inline-edit:focus {
-      border-bottom-color: var(--brand);
-      box-shadow: none;
-    }
-
-    .inline-edit-title {
-      font-size: 1rem;
-      font-weight: 600;
-      line-height: 1.35;
-      color: var(--ink);
-    }
-
-    .inline-edit-desc {
-      margin-top: 0.45rem;
-      font-size: 0.9rem;
-      line-height: 1.55;
-      color: var(--text-dim);
-      min-height: 1.55em;
+    .error-message {
+      margin: 0 0 0.75rem;
+      font-size: 0.95rem;
+      color: var(--danger);
     }
 
     .empty {
@@ -472,136 +344,123 @@
     >
       <header>
         <h1 class="brand reveal d1">alaning.me</h1>
-        <p class="headline reveal d2">A quiet place on the internet for Alan Ing.</p>
-        <p class="lede reveal d3">Projects, notes, and experiments — arriving soon.</p>
       </header>
 
-      <section class="reveal d4" aria-labelledby="capture-heading">
-        <p class="section-label" id="capture-heading">Add an idea here</p>
-        <form class="panel" @submit.prevent="submitIdea">
-          <label for="title">Title</label>
-          <input id="title" type="text" x-model="title" required maxlength="200" placeholder="What's the idea?" autocomplete="off">
+      <article class="bio reveal d2">
+        <section class="bio-section">
+          <h2 class="bio-intro">Hi, I'm Alan.</h2>
+          <p>I'm a software engineer based in Auckland, New Zealand, with a habit of getting curious about how things work — software systems, businesses, games, people, and occasionally myself.</p>
+          <p>Professionally, I work with technologies such as C#, .NET, React, TypeScript, SQL Server, Azure, distributed systems, APIs, cloud infrastructure, and automation. I enjoy the engineering side of the job, but I'm particularly interested in the point where technology meets real problems: understanding a system, finding where it breaks down, and figuring out how to make it simpler, more reliable, or more useful.</p>
+          <p>More recently, AI has become a big part of that curiosity. I'm interested in experimenting with AI tools and finding practical ways to use them in everyday workflows: coding, research, automation, learning, note-taking, and thinking through difficult problems.</p>
+        </section>
 
-          <label for="description">Description</label>
-          <textarea id="description" x-model="description" maxlength="5000" rows="4" placeholder="A little more context…"></textarea>
+        <section class="bio-section">
+          <h2>I like understanding systems</h2>
+          <p>A recurring theme in the things I enjoy is systems.</p>
+          <p>Give me a board game like Wingspan and I'll eventually start thinking about engines, resource flows, opportunity costs, and why one seemingly small decision compounds over several turns. Teach me accounting and I want to understand the underlying model: where value resides, how it moves, and why a single transaction can affect several different accounts.</p>
+          <p>The same instinct appears in software architecture, cooking, running, communication, and even storytelling.</p>
+          <p>I like getting past "what should I do?" and reaching "what is actually happening here?"</p>
+          <p>Once I have a mental model, experimentation becomes much more interesting.</p>
+        </section>
 
-          <template x-if="error">
-            <p class="error" x-text="error"></p>
-          </template>
+        <section class="bio-section">
+          <h2>Learning is one of my hobbies</h2>
+          <p>I tend to wander between subjects.</p>
+          <p>At various times that has meant learning more about accounting, psychology, communication, logical fallacies, storytelling, history, economics, AI, computer infrastructure, food, and game strategy.</p>
+          <p>I particularly enjoy ideas that suddenly make a collection of unrelated experiences fit together. Sometimes a concept from a board game turns out to be useful for thinking about software. A communication framework explains something I've noticed in conversations. A principle from endurance running turns out to be surprisingly similar to the way you build competence elsewhere: pace yourself, repeat the fundamentals, and improve gradually.</p>
+          <p>My notes tend to grow out of these connections.</p>
+          <p>I use tools like Obsidian to capture things I encounter, but I'm increasingly interested in using a personal knowledge base for more than storing information. I want it to be somewhere I can return to ideas, connect them, challenge them, and notice how my thinking changes over time.</p>
+        </section>
 
-          <div class="form-row">
-            <p class="hint" x-text="ideas.length ? ideas.length + ' saved' : 'Nothing saved yet'"></p>
-            <button class="btn btn-primary" type="submit" :disabled="submitting || !title.trim()" x-text="submitting ? 'Saving…' : 'Submit'"></button>
-          </div>
-        </form>
-      </section>
+        <section class="bio-section">
+          <h2>Away from the computer</h2>
+          <p>I enjoy running, skiing, cooking, board games, video games, and finding good food.</p>
+          <p>With running, I've become interested in endurance and pacing rather than simply trying to go as fast as possible. With skiing, I'm fascinated by the same progression from brute effort toward technique and efficiency.</p>
+          <p>Cooking scratches another kind of itch. I like understanding the components of a dish well enough that a recipe becomes less of a rigid set of instructions and more of a system I can play with. Chinese takeaway favourites, Filipino food, pasta, roast chicken, sauces, and whatever happens to look interesting at a night market have all provided useful experiments.</p>
+          <p>Games occupy a similar place for me. I enjoy the worlds and stories of games like Red Dead Redemption 2 and Cyberpunk 2077, but I'm equally capable of turning a board game into a small research project because I want to understand why good players make the decisions they do.</p>
+        </section>
 
-      <section class="reveal d5" aria-labelledby="ideas-heading">
+        <section class="bio-section">
+          <h2>I'm interested in people, too</h2>
+          <p>For someone who spends a lot of time thinking about technical systems, I've become increasingly interested in the much messier systems created by humans.</p>
+          <p>Why do people tell stories?</p>
+          <p>Why does complaining sometimes bring people closer together?</p>
+          <p>Why is gossip so tempting even when we know it can be risky?</p>
+          <p>Why can asking someone a direct question produce a one-word answer, while telling them a related story suddenly produces a ten-minute conversation?</p>
+          <p>I like frameworks, but I'm also learning that people cannot be reduced entirely to frameworks. Contradictions, uncertainty, humour, mistakes, changing your mind, and occasionally not having a neat explanation for something are part of being human.</p>
+          <p>That tension — between wanting to understand things systematically and recognising that not everything should be systematised — is probably one of the ideas I keep returning to.</p>
+        </section>
+
+        <section class="bio-section">
+          <h2>What I value</h2>
+          <p>Curiosity is probably the simplest description.</p>
+          <p>I like people who are willing to ask questions, try things, share what they discover, and admit when their model of the world needs updating.</p>
+          <p>I value competence, but also playfulness. Technology that solves a real problem. Conversations where people can actually be themselves. Learning something because it is useful, and occasionally learning something simply because it is interesting.</p>
+        </section>
+
+        <section class="bio-section bio-outro">
+          <p>This website is a place for some of that.</p>
+          <p>Expect notes about software, AI, things I'm learning, systems I'm trying to understand, food I'm experimenting with, games I'm overthinking, and ideas that I want to keep around long enough to think about properly.</p>
+        </section>
+      </article>
+
+      <section class="reveal d3" aria-labelledby="ideas-heading">
         <div class="ideas-head">
           <h2 id="ideas-heading">Ideas</h2>
-          <button type="button" class="btn btn-ghost" @click="filter = filter === 'starred' ? 'all' : 'starred'" x-text="filter === 'starred' ? 'Show all' : 'Favorites only'"></button>
+          <button
+            type="button"
+            class="btn btn-ghost"
+            x-show="hasStarred"
+            @click="filter = filter === 'starred' ? 'all' : 'starred'"
+            x-text="filter === 'starred' ? 'Show all' : 'Favorites only'"
+          ></button>
         </div>
 
-        <template x-if="loading">
+        <template x-if="loading && !error">
           <p class="muted">Loading ideas…</p>
         </template>
 
-        <template x-if="!loading && !visibleIdeas.length">
+        <template x-if="error">
+          <div class="error-box">
+            <p class="error-message" x-text="error"></p>
+            <button type="button" class="btn btn-ghost" @click="retry()" x-show="!retrying">Try again</button>
+          </div>
+        </template>
+
+        <template x-if="!loading && !error && !visibleIdeas.length">
           <div class="empty">
-            <strong x-text="filter === 'starred' ? 'No favorites yet' : 'Your first idea goes here'"></strong>
-            <span x-text="filter === 'starred' ? 'Star something from the list to pin it.' : 'Title + a short description is enough.'"></span>
+            <strong x-text="filter === 'starred' ? 'No favorites yet' : 'Nothing here yet'"></strong>
+            <span x-text="filter === 'starred' ? 'No starred items to show.' : 'Check back later.'"></span>
           </div>
         </template>
 
         <ul
           class="idea-list"
           x-show="!loading && visibleIdeas.length"
-          @click.outside="confirmDeleteId = null"
         >
           <template x-for="(idea, index) in visibleIdeas" :key="idea.id">
             <li class="idea-card" :style="'animation-delay:' + (Math.min(index, 8) * 0.04) + 's'">
-              <button
-                type="button"
-                class="star-btn"
-                :class="idea.starred ? 'is-on' : ''"
-                :aria-label="idea.starred ? 'Unstar idea' : 'Star idea'"
-                :disabled="togglingId === idea.id || editingId === idea.id"
-                @click="toggleStar(idea)"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="18" height="18" :fill="idea.starred ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="1.8">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8-4.2-4.1 5.9-.9L12 3.5z"/>
-                </svg>
-              </button>
+              <template x-if="idea.starred">
+                <span class="star-badge" aria-label="Starred">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="16" height="16" fill="currentColor" stroke="currentColor" stroke-width="1.8">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 3.5l2.6 5.3 5.9.9-4.2 4.1 1 5.8L12 16.9 6.7 19.6l1-5.8-4.2-4.1 5.9-.9L12 3.5z"/>
+                  </svg>
+                </span>
+              </template>
               <div class="idea-body">
                 <div class="idea-top">
                   <div class="idea-copy">
-                    <template x-if="editingId === idea.id">
-                      <input
-                        type="text"
-                        class="inline-edit inline-edit-title"
-                        x-model="editTitle"
-                        maxlength="200"
-                        aria-label="Edit title"
-                        x-init="$nextTick(() => { $el.focus(); $el.setSelectionRange($el.value.length, $el.value.length) })"
-                        @keydown.enter.prevent="saveEdit(idea)"
-                        @keydown.escape.prevent="cancelEdit()"
-                      >
-                    </template>
-                    <template x-if="editingId !== idea.id">
-                      <h3 class="idea-title" x-text="idea.title"></h3>
-                    </template>
-
-                    <template x-if="editingId === idea.id">
-                      <textarea
-                        class="inline-edit inline-edit-desc"
-                        x-model="editDescription"
-                        maxlength="5000"
-                        rows="2"
-                        aria-label="Edit description"
-                        @keydown.escape.prevent="cancelEdit()"
-                        @input="$el.style.height = 'auto'; $el.style.height = $el.scrollHeight + 'px'"
-                        x-init="$nextTick(() => { $el.style.height = 'auto'; $el.style.height = $el.scrollHeight + 'px' })"
-                      ></textarea>
-                    </template>
-                    <template x-if="editingId !== idea.id">
-                      <p class="idea-desc" x-show="idea.description" x-text="idea.description"></p>
-                    </template>
+                    <h3 class="idea-title">
+                      <template x-if="isUrl(idea.title)">
+                        <a :href="idea.title" target="_blank" rel="noopener" class="idea-link" x-text="formatUrl(idea.title)"></a>
+                      </template>
+                      <template x-if="!isUrl(idea.title)">
+                        <span x-text="idea.title"></span>
+                      </template>
+                    </h3>
+                    <p class="idea-desc" x-show="idea.description" x-text="idea.description"></p>
                   </div>
-
-                  <div class="idea-meta">
-                    <time class="idea-date" x-text="formatDate(idea.created_at)"></time>
-                    <div class="idea-actions">
-                      <button
-                        type="button"
-                        class="icon-btn"
-                        :class="editingId === idea.id ? 'is-editing' : ''"
-                        :aria-label="editingId === idea.id ? 'Save idea' : 'Edit idea'"
-                        :disabled="savingId === idea.id || deletingId === idea.id"
-                        @click.stop="editingId === idea.id ? saveEdit(idea) : startEdit(idea)"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M12 20h9"/>
-                          <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
-                        </svg>
-                      </button>
-                      <button
-                        type="button"
-                        class="icon-btn danger"
-                        :class="confirmDeleteId === idea.id ? 'armed' : ''"
-                        :aria-label="confirmDeleteId === idea.id ? 'Confirm delete' : 'Delete idea'"
-                        :disabled="savingId === idea.id || deletingId === idea.id || editingId === idea.id"
-                        @click.stop="confirmDeleteId === idea.id ? deleteIdea(idea) : (confirmDeleteId = idea.id)"
-                      >
-                        <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
-                          <path d="M3 6h18"/>
-                          <path d="M8 6V4h8v2"/>
-                          <path d="M19 6l-1 14H6L5 6"/>
-                          <path d="M10 11v6"/>
-                          <path d="M14 11v6"/>
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
+                  <time class="idea-date" x-text="formatDate(idea.created_at)"></time>
                 </div>
               </div>
             </li>
@@ -615,21 +474,14 @@
   <script>
     function ideasApp() {
       const api = () => (window.ALANING_API || '').replace(/\/$/, '');
+      const MAX_RETRIES = 3;
+      const RETRY_DELAY = 2000;
 
       return {
         ideas: [],
-        title: '',
-        description: '',
         loading: true,
-        submitting: false,
-        togglingId: null,
-        editingId: null,
-        editTitle: '',
-        editDescription: '',
-        savingId: null,
-        confirmDeleteId: null,
-        deletingId: null,
         error: null,
+        retrying: false,
         filter: 'all',
 
         get visibleIdeas() {
@@ -638,123 +490,57 @@
             : this.ideas;
         },
 
-        startEdit(idea) {
-          this.confirmDeleteId = null;
-          this.editingId = idea.id;
-          this.editTitle = idea.title || '';
-          this.editDescription = idea.description || '';
+        get hasStarred() {
+          return this.ideas.some((idea) => idea.starred);
         },
 
-        cancelEdit() {
-          this.editingId = null;
-          this.editTitle = '';
-          this.editDescription = '';
+        isUrl(text) {
+          if (!text) return false;
+          return /^https?:\/\/\S+$/i.test(text.trim());
         },
 
-        async saveEdit(idea) {
-          if (!this.editTitle.trim() || this.savingId) return;
-          this.savingId = idea.id;
-          this.error = null;
+        formatUrl(url) {
           try {
-            const r = await fetch(api() + '/api/ideas/' + idea.id, {
-              method: 'PATCH',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                title: this.editTitle,
-                description: this.editDescription,
-              }),
-            });
-            const data = await r.json().catch(() => ({}));
-            if (!r.ok) throw new Error(data.error || 'Could not update idea');
-            const idx = this.ideas.findIndex((i) => i.id === idea.id);
-            if (idx !== -1) this.ideas[idx] = data.idea;
-            this.cancelEdit();
-          } catch (e) {
-            this.error = e.message || 'Could not update idea';
-          } finally {
-            this.savingId = null;
+            const u = new URL(url);
+            let display = u.hostname.replace(/^www\./, '');
+            if (u.pathname && u.pathname !== '/') {
+              display += u.pathname.length > 30
+                ? u.pathname.slice(0, 27) + '…'
+                : u.pathname;
+            }
+            return display;
+          } catch {
+            return url.length > 50 ? url.slice(0, 47) + '…' : url;
           }
         },
 
-        async deleteIdea(idea) {
-          if (this.deletingId) return;
-          this.deletingId = idea.id;
-          this.error = null;
-          try {
-            const r = await fetch(api() + '/api/ideas/' + idea.id, {
-              method: 'DELETE',
-            });
-            const data = await r.json().catch(() => ({}));
-            if (!r.ok) throw new Error(data.error || 'Could not delete idea');
-            this.ideas = this.ideas.filter((i) => i.id !== idea.id);
-            if (this.editingId === idea.id) this.cancelEdit();
-            this.confirmDeleteId = null;
-          } catch (e) {
-            this.error = e.message || 'Could not delete idea';
-          } finally {
-            this.deletingId = null;
-          }
-        },
-
-        async load() {
+        async load(retryCount = 0) {
           this.loading = true;
           this.error = null;
+          this.retrying = retryCount > 0;
           try {
             const r = await fetch(api() + '/api/ideas');
             const data = await r.json().catch(() => ({}));
             if (!r.ok) throw new Error(data.error || 'Could not load ideas');
             this.ideas = data.ideas || [];
+            this.retrying = false;
           } catch (e) {
-            this.error = e.message || 'Could not load ideas';
+            if (retryCount < MAX_RETRIES) {
+              this.error = `Loading failed. Retrying (${retryCount + 1}/${MAX_RETRIES})…`;
+              setTimeout(() => this.load(retryCount + 1), RETRY_DELAY);
+              return;
+            }
+            this.error = 'Could not load ideas. Please refresh the page.';
+            this.retrying = false;
           } finally {
-            this.loading = false;
+            if (!this.retrying) {
+              this.loading = false;
+            }
           }
         },
 
-        async submitIdea() {
-          if (!this.title.trim() || this.submitting) return;
-          this.submitting = true;
-          this.error = null;
-          try {
-            const r = await fetch(api() + '/api/ideas', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({
-                title: this.title,
-                description: this.description,
-              }),
-            });
-            const data = await r.json().catch(() => ({}));
-            if (!r.ok) throw new Error(data.error || 'Could not save idea');
-            this.ideas = [data.idea, ...this.ideas];
-            this.title = '';
-            this.description = '';
-          } catch (e) {
-            this.error = e.message || 'Could not save idea';
-          } finally {
-            this.submitting = false;
-          }
-        },
-
-        async toggleStar(idea) {
-          if (this.togglingId) return;
-          this.togglingId = idea.id;
-          const prev = idea.starred;
-          idea.starred = !prev;
-          try {
-            const r = await fetch(api() + '/api/ideas/' + idea.id + '/star', {
-              method: 'POST',
-            });
-            const data = await r.json().catch(() => ({}));
-            if (!r.ok) throw new Error(data.error || 'Could not update star');
-            const idx = this.ideas.findIndex((i) => i.id === idea.id);
-            if (idx !== -1) this.ideas[idx] = data.idea;
-          } catch (e) {
-            idea.starred = prev;
-            this.error = e.message || 'Could not update star';
-          } finally {
-            this.togglingId = null;
-          }
+        retry() {
+          this.load(0);
         },
 
         formatDate(value) {
